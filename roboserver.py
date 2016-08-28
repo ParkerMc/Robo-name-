@@ -80,9 +80,9 @@ while not done:
 	if y_joy < float(0.3) and y_joy > float(-0.3):
 		y_joy = float(0)
 	if x_joy > float(0.3) or x_joy < float(-0.3) or y_joy > float(0.3) or y_joy < float(-0.3) or Oy_joy != 0 or Ox_joy != 0:
-		conn.sendall(str(x_joy) + "," +str(y_joy))
+		conn.sendall(str(x_joy) + "," +str(y_joy)+",")
 	if x_key > float(0.3) or x_key < float(-0.3) or y_key > float(0.3) or y_key < float(-0.3) or Oy_key != 0 or Ox_key != 0:
-		conn.sendall(str(x_key) + "," +str(y_key))
+		conn.sendall(str(x_key) + "," +str(y_key)+",")
  
 	# Limit to 10 frames per second
 	clock.tick(20)

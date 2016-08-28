@@ -61,10 +61,10 @@ while not done:
 		# JOYBUTTONUP JOYHATMOTION
 		if event.type == pygame.JOYBUTTONDOWN:
 			if get_button(4):
-				add += float(0.1)
+				add -= float(0.1)
 				print "Will add"+str(add)
 			if get_button(5):
-				add -= float(0.1)
+				add += float(0.1)
 				print "Will add"+str(add)
 	press=pygame.key.get_pressed()
 	if press[pygame.K_w]:
@@ -81,11 +81,15 @@ while not done:
 		print (str(x_joy) + str(y_joy))
 	if x_joy < float(0.3) and x_joy > float(-0.3):
 		x_joy = float(0)
-	else:
+	elif x_joy < float(-0.3):
+		x_joy -= add
+	elif x_joy > float(0.3):
 		x_joy += add
 	if y_joy < float(0.3) and y_joy > float(-0.3):
 		y_joy = float(0)
-	else:
+	elif y_joy < float(-0.3):
+		y_joy -= add
+	elif y_joy > float(0.3):
 		y_joy += add
 	if x_joy > float(0.3) or x_joy < float(-0.3) or y_joy > float(0.3) or y_joy < float(-0.3) or Oy_joy != 0 or Ox_joy != 0:
 		conn.sendall(str(x_joy) + "," +str(y_joy)+",")

@@ -23,11 +23,11 @@ while (True):
     	ox = xval
     	oy = yval
         data = s.recvfrom(1024)[0].split(",")
-        xval = struct.unpack('>f', data[0][:4])
-        yval = struct.unpack('>f', data[1][:4])
-        print((xval, yval))
-        xval = float(xval[0])
-        yval = float(yval[0])
+        xval = data[0]
+        yval = data[1]
+        print (xval, yval)
+        xval = float(xval)
+        yval = float(yval)
         #print xval
         if xval == 0 and ox != 0: m_x.idle()
         elif xval > 0:
@@ -48,7 +48,7 @@ while (True):
                 m_y.turn(-speed, dataX)
         elif yval > 0:
             try:
-                m_y.run(-yspeed*abs(yval-40))
+                m_y.run(-yspeed*abs(yval))
             except nxt.motor.BlockedException:
                 m_y.turn(speed, dataX)
 
@@ -59,4 +59,4 @@ while (True):
         #s.close()
         #m_x.idle()
         #m_y.idle()
-        #raise e
+        raise e

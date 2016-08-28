@@ -14,14 +14,15 @@ s.connect((HOST, PORT))
 m_x = Motor(b, PORT_B)
 m_y = Motor(b, PORT_C)
 speed = 75
-yspeed = 60
-xspeed = 65
+yspeed = 35
+xspeed = 35
 yval = 0
 xval = 0
+add = float(0.8)
 while (True):
     try:
-    	ox = xval
-    	oy = yval
+        ox = xval
+        oy = yval
         data = s.recvfrom(1024)[0].split(",")
         xval = data[0]
         yval = data[1]
@@ -32,23 +33,23 @@ while (True):
         if xval == 0 and ox != 0: m_x.idle()
         elif xval > 0:
             try:
-                m_x.run(-xspeed*abs(xval))
+                m_x.run(-xspeed*(abs(xval)+add))
             except nxt.motor.BlockedException:
                 m_x.turn(speed, dataX)
         elif xval < 0:
             try:
-                m_x.run(xspeed*abs(xval))
+                m_x.run(xspeed*(abs(xval)+add))
             except nxt.motor.BlockedException:
                 m_x.turn(-speed, dataX)
         if yval == 0 and oy !=0: m_y.idle()
         elif yval < 0:
             try:
-                m_y.run(yspeed*abs(yval))
+                m_y.run(yspeed*(abs(yval)+add))
             except nxt.motor.BlockedException:
                 m_y.turn(-speed, dataX)
         elif yval > 0:
             try:
-                m_y.run(-yspeed*abs(yval))
+                m_y.run(-yspeed*(abs(yval)+add))
             except nxt.motor.BlockedException:
                 m_y.turn(speed, dataX)
 

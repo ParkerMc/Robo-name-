@@ -41,6 +41,7 @@ x_key = float(0)
 y_key = float(0)
 x_joy = float(0)
 y_joy = float(0)
+add = float(0)
 while not done:
 	Ox_key = x_key
 	Oy_key = y_key
@@ -59,26 +60,33 @@ while not done:
 		# PPossible joystick actions: JOYAXISMOTION JOYBALLMOTION JOYBUTTONDOWN
 		# JOYBUTTONUP JOYHATMOTION
 		if event.type == pygame.JOYBUTTONDOWN:
-			print("Joystick button pressed.")
-		if event.type == pygame.JOYBUTTONUP:
-			print("Joystick button released.")
+			if get_button(4):
+				add += float(0.1)
+				print "Will add"+str(add)
+			if get_button(5):
+				add -= float(0.1)
+				print "Will add"+str(add)
 	press=pygame.key.get_pressed()
 	if press[pygame.K_w]:
-		y_key += float(-1)
+		y_key += float(-0.75)
 	if press[pygame.K_a]:
-		x_key += float(-1)
+		x_key += float(-0.75)
 	if press[pygame.K_s]:
-		y_key += float(1)
+		y_key += float(0.75)
 	if press[pygame.K_d]:
-		x_key += float(1)
+		x_key += float(0.75)
 	if joystick_count > 0:
 		x_joy = joystick.get_axis(0)
 		y_joy = joystick.get_axis(1)
 		print (str(x_joy) + str(y_joy))
 	if x_joy < float(0.3) and x_joy > float(-0.3):
 		x_joy = float(0)
+	else:
+		x_joy += add
 	if y_joy < float(0.3) and y_joy > float(-0.3):
 		y_joy = float(0)
+	else:
+		y_joy += add
 	if x_joy > float(0.3) or x_joy < float(-0.3) or y_joy > float(0.3) or y_joy < float(-0.3) or Oy_joy != 0 or Ox_joy != 0:
 		conn.sendall(str(x_joy) + "," +str(y_joy)+",")
 	if x_key > float(0.3) or x_key < float(-0.3) or y_key > float(0.3) or y_key < float(-0.3) or Oy_key != 0 or Ox_key != 0:

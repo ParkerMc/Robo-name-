@@ -60,10 +60,10 @@ while not done:
 		# PPossible joystick actions: JOYAXISMOTION JOYBALLMOTION JOYBUTTONDOWN
 		# JOYBUTTONUP JOYHATMOTION
 		if event.type == pygame.JOYBUTTONDOWN:
-			if get_button(4):
+			if joystick.get_button(4):
 				add -= float(0.1)
 				print "Will add"+str(add)
-			if get_button(5):
+			if joystick.get_button(5):
 				add += float(0.1)
 				print "Will add"+str(add)
 	press=pygame.key.get_pressed()

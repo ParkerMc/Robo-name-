@@ -14,8 +14,8 @@ s.connect((HOST, PORT))
 m_x = Motor(b, PORT_B)
 m_y = Motor(b, PORT_C)
 speed = 75
-yspeed = 90#80
-xspeed = 80#70
+yspeed = 60
+xspeed = 65
 yval = 0
 xval = 0
 while (True):
@@ -40,7 +40,7 @@ while (True):
                 m_x.run(xspeed*abs(xval))
             except nxt.motor.BlockedException:
                 m_x.turn(-speed, dataX)
-        if yval == 0 and oy !=0: m_y.brake()
+        if yval == 0 and oy !=0: m_y.idle()
         elif yval < 0:
             try:
                 m_y.run(yspeed*abs(yval))
